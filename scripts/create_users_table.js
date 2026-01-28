@@ -34,7 +34,7 @@ async function setup() {
 
         // 2. Create Admin User
         const email = 'admin@dashboard.com';
-        const password = 'Carmen#Secure$2026'; // New complex password
+        const password = 'Nexus$bonanzA#0'; // Updated password
         const passwordHash = await bcrypt.hash(password, 10);
 
         console.log(`👤 Creating default user: ${email}`);
