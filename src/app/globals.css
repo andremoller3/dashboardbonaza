@@ -1,26 +1,106 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Premium Dark Theme - Acid Green Accent */
+  --background: #050505;
+  --foreground: #ededed;
+
+  --primary: #ccff00;
+  --primary-foreground: #000000;
+
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
+
+  --border: #262626;
+  --input: #262626;
+
+  --muted: #171717;
+  --muted-foreground: #737373;
+
+  --chart-1: #ccff00;
+  /* Acid Green */
+  --chart-2: #80ff00;
+  /* Lighter */
+  --chart-3: #4d4d4d;
+  /* Dark Grey */
+  --chart-4: #ffffff;
+  --chart-5: #000000;
+
+  --radius: 0px;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --radius-lg: var(--radius);
+
+  /* Override Zinc to HEX to fix html2canvas crash (Tailwind v4 defaults to OKLCH) */
+  --color-zinc-50: #fafafa;
+  --color-zinc-100: #f4f4f5;
+  --color-zinc-200: #e4e4e7;
+  --color-zinc-300: #d4d4d8;
+  --color-zinc-400: #a1a1aa;
+  --color-zinc-500: #71717a;
+  --color-zinc-600: #52525b;
+  --color-zinc-700: #3f3f46;
+  --color-zinc-800: #27272a;
+  --color-zinc-900: #18181b;
+  --color-zinc-950: #09090b;
+
+  /* Override Slate/Gray/Neutral just in case */
+  --color-gray-50: #f9fafb;
+  --color-gray-900: #111827;
+  --color-slate-50: #f8fafc;
+  --color-slate-900: #0f172a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    @apply font-sans antialiased;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--muted-foreground);
+}
+
+/* PDF Export Utilities */
+.print-container {
+  background: var(--background) !important;
+  color: var(--foreground) !important;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
 }
