@@ -51,7 +51,9 @@ export async function getMetrics(startDate?: string, endDate?: string, model: st
           WITH created_stats AS (
              SELECT 
                DATE(data_criacao) as d,
-               COUNT(*) as new_leads
+               COUNT(*) as new_leads,
+               COUNT(CASE WHEN coalesce(contador_mensagens, 0) <= 2 THEN 1 END) as "noContinuity",
+               COUNT(CASE WHEN coalesce(contador_mensagens, 0) > 2 THEN 1 END) as "withContinuity"
              FROM leads
              WHERE DATE(data_criacao) >= $1::date AND DATE(data_criacao) <= $2::date
              GROUP BY 1
@@ -62,9 +64,7 @@ export async function getMetrics(startDate?: string, endDate?: string, model: st
                COUNT(*) as attended,
                COUNT(CASE WHEN CAST(ads_history AS TEXT) LIKE '%"source": "lead_form"%' THEN 1 END) as "formAds",
                SUM(CASE WHEN ${transferredColumn} IS TRUE THEN 1 ELSE 0 END) as transferred,
-               SUM(COALESCE(follow_up, 0)) as "followUps",
-               COUNT(CASE WHEN coalesce(contador_mensagens, 0) <= 2 THEN 1 END) as "noContinuity",
-               COUNT(CASE WHEN coalesce(contador_mensagens, 0) > 2 THEN 1 END) as "withContinuity"
+               SUM(COALESCE(follow_up, 0)) as "followUps"
              FROM leads
              WHERE DATE(data_atualizacao) >= $1::date AND DATE(data_atualizacao) <= $2::date
              GROUP BY 1
@@ -76,8 +76,8 @@ export async function getMetrics(startDate?: string, endDate?: string, model: st
             COALESCE(u."formAds", 0) as "formAds",
             COALESCE(u.transferred, 0) as transferred,
             COALESCE(u."followUps", 0) as "followUps",
-            COALESCE(u."noContinuity", 0) as "noContinuity",
-            COALESCE(u."withContinuity", 0) as "withContinuity"
+            COALESCE(c."noContinuity", 0) as "noContinuity",
+            COALESCE(c."withContinuity", 0) as "withContinuity"
           FROM created_stats c
           FULL OUTER JOIN updated_stats u ON c.d = u.d
           ORDER BY "dateIso" DESC
