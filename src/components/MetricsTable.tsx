@@ -22,7 +22,7 @@ export function MetricsTable({ data }: MetricsTableProps) {
                             <th className="p-4 font-semibold text-right">Atendidos</th>
                             <th className="p-4 font-semibold text-right">Transferidos</th>
                             <th className="p-4 font-semibold text-right">Follow-ups</th>
-                            <th className="p-4 font-semibold text-right">Não Engajados (&lt;2)</th>
+                            <th className="p-4 font-semibold text-right">Não Engajados (&lt;=2)</th>
                             <th className="p-4 font-semibold text-right">Engajados (&gt;2)</th>
                             <th className="p-4 font-semibold text-right">Taxa Engaj.</th>
                         </tr>

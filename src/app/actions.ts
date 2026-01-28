@@ -63,7 +63,7 @@ export async function getMetrics(startDate?: string, endDate?: string, model: st
                COUNT(CASE WHEN CAST(ads_history AS TEXT) LIKE '%"source": "lead_form"%' THEN 1 END) as "formAds",
                SUM(CASE WHEN ${transferredColumn} IS TRUE THEN 1 ELSE 0 END) as transferred,
                SUM(COALESCE(follow_up, 0)) as "followUps",
-               COUNT(CASE WHEN coalesce(contador_mensagens, 0) < 2 THEN 1 END) as "noContinuity",
+               COUNT(CASE WHEN coalesce(contador_mensagens, 0) <= 2 THEN 1 END) as "noContinuity",
                COUNT(CASE WHEN coalesce(contador_mensagens, 0) > 2 THEN 1 END) as "withContinuity"
              FROM leads
              WHERE DATE(data_atualizacao) >= $1::date AND DATE(data_atualizacao) <= $2::date
