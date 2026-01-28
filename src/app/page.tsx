@@ -72,8 +72,8 @@ export default function Home() {
           {/* Header Section (Title Only) */}
           <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-border">
             <AnimatedWrapper direction="left">
-              <h1 className="text-4xl font-black tracking-tighter uppercase leading-none">
-                DASHBOARD
+              <h1 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-2">
+                DASHBOARD <span className="text-[#ccff00]">BONANZA</span>
               </h1>
               <p className="mt-2 text-muted-foreground text-lg">
                 Acompanhamento em tempo real da performance do <strong>Agente IA</strong>.
