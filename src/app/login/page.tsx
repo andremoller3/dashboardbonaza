@@ -31,6 +31,8 @@ export default function LoginPage() {
                                 type="email"
                                 name="email"
                                 placeholder="seu@email.com"
+                                autoComplete="off"
+                                data-lpignore="true"
                                 required
                             />
                         </div>
