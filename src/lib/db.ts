@@ -35,7 +35,8 @@ export function getDbPool(model?: string): Pool {
 
     const pool = new Pool({
         connectionString,
-        ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined
+        // ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : undefined
+        ssl: undefined // Forcing no SSL to match user's VPS setup
     });
 
     pools.set(cacheKey, pool);
