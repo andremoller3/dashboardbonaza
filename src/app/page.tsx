@@ -154,12 +154,7 @@ export default function Home() {
             </div>
 
             <AnimatedWrapper delay={0.4}>
-              <MetricsTable data={metrics} />
-            </AnimatedWrapper>
-
-            {/* Footer Summary (Dynamic based on filter) */}
-            <AnimatedWrapper delay={0.6}>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-2 mb-8">
                 <div className="border border-white/5 p-6 bg-[#0a0a0a] rounded-3xl shadow-lg hover:border-[#ccff00]/20 transition-colors group">
                   <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-[#ccff00] transition-colors">Novos Leads</div>
                   <div className="text-4xl font-black tracking-tight">{summary.leads}</div>
@@ -180,11 +175,15 @@ export default function Home() {
             </AnimatedWrapper>
 
             {/* Visual Analytics Modules */}
-            <AnimatedWrapper delay={0.8}>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <AnimatedWrapper delay={0.6}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <FunnelChart data={funnelData} />
                 <SourceChart data={sourceData} />
               </div>
+            </AnimatedWrapper>
+
+            <AnimatedWrapper delay={0.8}>
+              <MetricsTable data={metrics} />
             </AnimatedWrapper>
 
           </section>

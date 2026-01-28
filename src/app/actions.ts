@@ -52,6 +52,7 @@ export async function getMetrics(startDate?: string, endDate?: string, model: st
              SELECT 
                DATE(data_criacao) as d,
                COUNT(*) as new_leads,
+               SUM(CASE WHEN ${transferredColumn} IS TRUE THEN 1 ELSE 0 END) as transferred,
                COUNT(CASE WHEN coalesce(contador_mensagens, 0) <= 2 THEN 1 END) as "noContinuity",
                COUNT(CASE WHEN coalesce(contador_mensagens, 0) > 2 THEN 1 END) as "withContinuity"
              FROM leads
@@ -63,7 +64,6 @@ export async function getMetrics(startDate?: string, endDate?: string, model: st
                DATE(data_atualizacao) as d,
                COUNT(*) as attended,
                COUNT(CASE WHEN CAST(ads_history AS TEXT) LIKE '%"source": "lead_form"%' THEN 1 END) as "formAds",
-               SUM(CASE WHEN ${transferredColumn} IS TRUE THEN 1 ELSE 0 END) as transferred,
                SUM(COALESCE(follow_up, 0)) as "followUps"
              FROM leads
              WHERE DATE(data_atualizacao) >= $1::date AND DATE(data_atualizacao) <= $2::date
@@ -74,7 +74,7 @@ export async function getMetrics(startDate?: string, endDate?: string, model: st
             COALESCE(c.new_leads, 0) as leads,
             COALESCE(u.attended, 0) as attended,
             COALESCE(u."formAds", 0) as "formAds",
-            COALESCE(u.transferred, 0) as transferred,
+            COALESCE(c.transferred, 0) as transferred,
             COALESCE(u."followUps", 0) as "followUps",
             COALESCE(c."noContinuity", 0) as "noContinuity",
             COALESCE(c."withContinuity", 0) as "withContinuity"
