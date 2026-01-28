@@ -3,6 +3,7 @@
 import { getDbPool } from "@/lib/db";
 import { METRICS_DATA, AgentMetric } from "@/lib/mockData";
 import { format } from "date-fns";
+import { auth } from "@/auth";
 
 export interface FunnelStat {
     name: string;
@@ -22,6 +23,12 @@ export interface DashboardData {
 }
 
 export async function getMetrics(startDate?: string, endDate?: string, model: string = "triton"): Promise<DashboardData> {
+    // Security Check (Defense in Depth)
+    const session = await auth();
+    if (!session?.user) {
+        throw new Error("Unauthorized access");
+    }
+
     // Default dates
     const start = startDate || new Date(new Date().setDate(new Date().getDate() - 30)).toISOString().split('T')[0];
     const end = endDate || new Date().toISOString().split('T')[0];
