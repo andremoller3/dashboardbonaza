@@ -29,10 +29,14 @@ export default function Home() {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getMetrics(dateRange.start, dateRange.end, selectedVehicle);
-      setMetrics(data.dailyMetrics);
-      setFunnelData(data.funnelStats);
-      setSourceData(data.sourceStats);
+      try {
+        const data = await getMetrics(dateRange.start, dateRange.end, selectedVehicle);
+        setMetrics(data.dailyMetrics);
+        setFunnelData(data.funnelStats);
+        setSourceData(data.sourceStats);
+      } catch (error) {
+        console.log("Fetch aborted or unauthorized (likely logging out):", error);
+      }
     }
     fetchData();
   }, [dateRange, selectedVehicle]);
