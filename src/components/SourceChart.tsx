@@ -42,7 +42,7 @@ export function SourceChart({ data }: SourceChartProps) {
                         <Tooltip
                             contentStyle={{ backgroundColor: '#000', borderColor: '#333', color: '#fff' }}
                             itemStyle={{ color: '#ccff00' }}
-                            formatter={(value: number) => [value, "Leads"]}
+                            formatter={(value: any) => [value, "Leads"]}
                         />
                     </PieChart>
                 </ResponsiveContainer>
