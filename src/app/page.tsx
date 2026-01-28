@@ -72,15 +72,15 @@ export default function Home() {
           {/* Header Section (Title Only) */}
           <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-border">
             <AnimatedWrapper direction="left">
-              <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-2">
+              <h1 className="text-2xl md:text-5xl font-black uppercase tracking-tighter mb-1 md:mb-2">
                 DASHBOARD <span className="text-[#ccff00]">BONANZA</span>
               </h1>
-              <p className="mt-2 text-muted-foreground text-lg">
+              <p className="mt-1 md:mt-2 text-muted-foreground text-sm md:text-lg">
                 Acompanhamento em tempo real da performance do <strong>Agente IA</strong>.
               </p>
-              <div className="mt-4 inline-block border border-[#ccff00]/30 bg-[#ccff00]/5 px-4 py-1 rounded-sm">
-                <span className="text-[#ccff00] font-mono text-sm uppercase tracking-widest mr-2">MODELO:</span>
-                <span className="text-white font-black text-xl uppercase tracking-wider shadow-[#ccff00] drop-shadow-[0_0_5px_rgba(204,255,0,0.5)]">
+              <div className="mt-2 md:mt-4 inline-block border border-[#ccff00]/30 bg-[#ccff00]/5 px-3 py-1 md:px-4 rounded-sm">
+                <span className="text-[#ccff00] font-mono text-xs md:text-sm uppercase tracking-widest mr-2">MODELO:</span>
+                <span className="text-white font-black text-lg md:text-xl uppercase tracking-wider shadow-[#ccff00] drop-shadow-[0_0_5px_rgba(204,255,0,0.5)]">
                   {selectedVehicle}
                 </span>
               </div>
