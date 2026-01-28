@@ -26,11 +26,11 @@ export default function LoginPage() {
                                 Email
                             </label>
                             <input
-                                className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-white placeholder-white/20 focus:outline-none focus:border-[#ccff00] transition-colors"
+                                className="w-full bg-[#0a0a0a] border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-[#ccff00] transition-colors"
                                 id="email"
                                 type="email"
                                 name="email"
-                                placeholder="admin@dashboard.com"
+                                placeholder="seu@email.com"
                                 required
                             />
                         </div>
