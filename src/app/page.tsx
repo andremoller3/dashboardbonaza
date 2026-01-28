@@ -59,26 +59,47 @@ export default function Home() {
     ? ((summary.engaged / summary.interactions) * 100).toFixed(1)
     : "0.0";
 
-  return (
-    <div className="flex min-h-screen bg-background text-foreground">
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-      {/* Fixed Sidebar */}
-      <Sidebar selected={selectedVehicle} onSelect={setSelectedVehicle} />
+  return (
+    <div className="flex min-h-screen bg-background text-foreground relative">
+
+      {/* Responsive Sidebar */}
+      <Sidebar
+        selected={selectedVehicle}
+        onSelect={setSelectedVehicle}
+        isOpen={isMobileMenuOpen}
+        onClose={() => setIsMobileMenuOpen(false)}
+      />
 
       {/* Main Content Area */}
-      <main className="flex-1 ml-64 min-h-screen p-8 md:p-12 lg:p-16">
-        <div className="max-w-7xl mx-auto space-y-12">
+      <main className="flex-1 ml-0 md:ml-64 min-h-screen p-4 md:p-12 lg:p-16 w-full">
+        <div className="max-w-7xl mx-auto space-y-6 md:space-y-12">
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden flex items-center justify-between mb-4">
+            <button
+              onClick={() => setIsMobileMenuOpen(true)}
+              className="p-2 -ml-2 text-muted-foreground hover:text-white"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            {/* Logo Mobile */}
+            <div className="relative w-8 h-8 opacity-80">
+              <Image src="/logo.png" alt="Logo" fill className="object-contain" />
+            </div>
+          </div>
 
           {/* Header Section (Title Only) */}
           <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-8 border-b border-border">
             <AnimatedWrapper direction="left">
-              <h1 className="text-2xl md:text-5xl font-black uppercase tracking-tighter mb-1 md:mb-2">
+              <h1 className="text-3xl md:text-5xl font-black uppercase tracking-tighter mb-1 md:mb-2 leading-none">
                 DASHBOARD <span className="text-[#ccff00]">BONANZA</span>
               </h1>
               <p className="mt-1 md:mt-2 text-muted-foreground text-sm md:text-lg">
                 Acompanhamento em tempo real da performance do <strong>Agente IA</strong>.
               </p>
-              <div className="mt-2 md:mt-4 inline-block border border-[#ccff00]/30 bg-[#ccff00]/5 px-3 py-1 md:px-4 rounded-sm">
+              <div className="mt-3 md:mt-4 inline-block border border-[#ccff00]/30 bg-[#ccff00]/5 px-3 py-1 md:px-4 rounded-sm">
                 <span className="text-[#ccff00] font-mono text-xs md:text-sm uppercase tracking-widest mr-2">MODELO:</span>
                 <span className="text-white font-black text-lg md:text-xl uppercase tracking-wider shadow-[#ccff00] drop-shadow-[0_0_5px_rgba(204,255,0,0.5)]">
                   {selectedVehicle}
@@ -86,20 +107,20 @@ export default function Home() {
               </div>
             </AnimatedWrapper>
 
-            <AnimatedWrapper direction="right" delay={0.2} className="flex flex-col gap-4 items-end">
+            <AnimatedWrapper direction="right" delay={0.2} className="flex flex-col gap-4 items-end w-full md:w-auto">
               {/* Filter Component */}
-              <div className="no-print">
+              <div className="no-print w-full md:w-auto">
                 <DateFilter onFilterChange={setDateRange} />
               </div>
 
-              <div className="no-print">
+              <div className="no-print w-full md:w-auto">
                 <ExportPdfButton targetId="dashboard-report" />
               </div>
             </AnimatedWrapper>
           </header>
 
           {/* Dashboard Content - Targeted for PDF Capture */}
-          <section id="dashboard-report" className="print-container space-y-8 bg-background p-4 md:p-0">
+          <section id="dashboard-report" className="print-container space-y-8 bg-background p-1 md:p-0">
 
             {/* PDF ONLY HEADER (Hidden on Screen) */}
             <div className="pdf-header hidden mb-8 border-b border-white/20 pb-6">
@@ -134,7 +155,7 @@ export default function Home() {
 
             {/* Footer Summary (Dynamic based on filter) */}
             <AnimatedWrapper delay={0.6}>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mt-8">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-8">
                 <div className="border border-white/5 p-6 bg-[#0a0a0a] rounded-3xl shadow-lg hover:border-[#ccff00]/20 transition-colors group">
                   <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-[#ccff00] transition-colors">Novos Leads</div>
                   <div className="text-4xl font-black tracking-tight">{summary.leads}</div>
