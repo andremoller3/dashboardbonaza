@@ -7,9 +7,10 @@ import { format, parseISO } from "date-fns";
 
 interface MetricsTableProps {
     data: AgentMetric[];
+    showTestDrive?: boolean;
 }
 
-export function MetricsTable({ data }: MetricsTableProps) {
+export function MetricsTable({ data, showTestDrive = true }: MetricsTableProps) {
     return (
         <div className="w-full overflow-hidden border border-white/5 bg-[#0a0a0a] rounded-3xl shadow-2xl">
             <div className="overflow-x-auto">
@@ -21,6 +22,9 @@ export function MetricsTable({ data }: MetricsTableProps) {
                             <th className="p-4 font-semibold text-right">Form/Anúncio</th>
                             <th className="p-4 font-semibold text-right">Atendidos</th>
                             <th className="p-4 font-semibold text-right">Transferidos</th>
+                            {showTestDrive && (
+                                <th className="p-4 font-semibold text-right text-purple-400 drop-shadow-[0_0_5px_rgba(192,132,252,0.5)]">Test Drive</th>
+                            )}
                             <th className="p-4 font-semibold text-right">Follow-ups</th>
                             <th className="p-4 font-semibold text-right">Não Engajados (&lt;=2)</th>
                             <th className="p-4 font-semibold text-right">Engajados (&gt;2)</th>
@@ -45,6 +49,9 @@ export function MetricsTable({ data }: MetricsTableProps) {
                                     <td className="p-4 text-right">{row.formAds}</td>
                                     <td className="p-4 text-right">{row.attended}</td>
                                     <td className="p-4 text-right text-muted-foreground">{row.transferred}</td>
+                                    {showTestDrive && (
+                                        <td className="p-4 text-right text-purple-400 font-bold drop-shadow-[0_0_3px_rgba(192,132,252,0.3)]">{row.testDrive}</td>
+                                    )}
                                     <td className="p-4 text-right">{row.followUps}</td>
                                     <td className="p-4 text-right text-muted-foreground">{row.noContinuity}</td>
                                     <td className="p-4 text-right font-medium text-primary">{row.withContinuity}</td>

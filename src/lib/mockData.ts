@@ -5,6 +5,7 @@ export interface AgentMetric {
     formAds: number;
     attended: number;
     transferred: number;
+    testDrive: number; // New metric
     followUps: number;
     noContinuity: number; // <= 2
     withContinuity: number; // > 2
@@ -26,6 +27,7 @@ export const METRICS_DATA: AgentMetric[] = [
         formAds: 4,
         attended: 5,
         transferred: 0,
+        testDrive: 1,
         followUps: 8,
         noContinuity: 5,
         withContinuity: 0,
@@ -38,6 +40,7 @@ export const METRICS_DATA: AgentMetric[] = [
         formAds: 5,
         attended: 9,
         transferred: 2,
+        testDrive: 0,
         followUps: 4,
         noContinuity: 7,
         withContinuity: 2,
@@ -50,6 +53,7 @@ export const METRICS_DATA: AgentMetric[] = [
         formAds: 7,
         attended: 11,
         transferred: 1,
+        testDrive: 0,
         followUps: 10,
         noContinuity: 9,
         withContinuity: 0,
@@ -62,6 +66,7 @@ export const METRICS_DATA: AgentMetric[] = [
         formAds: 5,
         attended: 7,
         transferred: 0,
+        testDrive: 0,
         followUps: 4,
         noContinuity: 6,
         withContinuity: 0,
@@ -74,6 +79,7 @@ export const METRICS_DATA: AgentMetric[] = [
         formAds: 6,
         attended: 7,
         transferred: 0,
+        testDrive: 0,
         followUps: 11,
         noContinuity: 7,
         withContinuity: 0,
@@ -86,6 +92,7 @@ export const METRICS_DATA: AgentMetric[] = [
         formAds: 9,
         attended: 13,
         transferred: 0,
+        testDrive: 0,
         followUps: 11,
         noContinuity: 12,
         withContinuity: 0,
@@ -98,6 +105,7 @@ export const METRICS_DATA: AgentMetric[] = [
         formAds: 10,
         attended: 13,
         transferred: 0,
+        testDrive: 0,
         followUps: 10,
         noContinuity: 11,
         withContinuity: 0,

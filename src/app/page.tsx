@@ -3,8 +3,10 @@
 import { useState, useMemo, useEffect } from "react";
 import Image from "next/image";
 import { ExportPdfButton } from "@/components/ExportPdfButton";
+
 import { MetricsTable } from "@/components/MetricsTable";
 import { DateFilter, DateRange } from "@/components/DateFilter";
+
 import { FunnelChart } from "@/components/FunnelChart";
 import { SourceChart } from "@/components/SourceChart";
 import { Sidebar } from "@/components/Sidebar";
@@ -54,9 +56,10 @@ export default function Home() {
       leads: acc.leads + curr.leads,
       attended: acc.attended + curr.attended,
       transferred: acc.transferred + (curr.transferred || 0),
+      testDrive: acc.testDrive + (curr.testDrive || 0),
       engaged: acc.engaged + (curr.withContinuity || 0),
       interactions: acc.interactions + (curr.withContinuity || 0) + (curr.noContinuity || 0)
-    }), { leads: 0, attended: 0, transferred: 0, engaged: 0, interactions: 0 });
+    }), { leads: 0, attended: 0, transferred: 0, testDrive: 0, engaged: 0, interactions: 0 });
   }, [metrics]);
 
   const engagementRate = summary.interactions > 0
@@ -64,6 +67,9 @@ export default function Home() {
     : "0.0";
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Check if test drive should be shown (Not for Fuso)
+  const showTestDrive = selectedVehicle !== 'fuso';
 
   return (
     <div className="flex min-h-screen bg-background text-foreground relative">
@@ -153,8 +159,10 @@ export default function Home() {
               <div className="text-xl font-bold text-primary">{displayDate}</div>
             </div>
 
+
+
             <AnimatedWrapper delay={0.4}>
-              <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 mt-2 mb-8">
+              <div className={`grid grid-cols-1 md:grid-cols-4 ${showTestDrive ? 'lg:grid-cols-5' : ''} gap-4 md:gap-6 mt-2 mb-8`}>
                 <div className="border border-white/5 p-6 bg-[#0a0a0a] rounded-3xl shadow-lg hover:border-[#ccff00]/20 transition-colors group">
                   <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-[#ccff00] transition-colors">Novos Leads</div>
                   <div className="text-4xl font-black tracking-tight">{summary.leads}</div>
@@ -167,6 +175,14 @@ export default function Home() {
                   <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-[#ccff00] transition-colors">Transferidos</div>
                   <div className="text-4xl font-black tracking-tight text-[#ccff00] drop-shadow-[0_0_10px_rgba(204,255,0,0.3)]">{summary.transferred}</div>
                 </div>
+
+                {showTestDrive && (
+                  <div className="border border-white/5 p-6 bg-[#0a0a0a] rounded-3xl shadow-lg hover:border-[#a855f7]/40 transition-colors group">
+                    <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-purple-400 transition-colors">Test Drives</div>
+                    <div className="text-4xl font-black tracking-tight text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">{summary.testDrive}</div>
+                  </div>
+                )}
+
                 <div className="border border-white/5 p-6 bg-[#0a0a0a] rounded-3xl shadow-lg hover:border-[#ccff00]/20 transition-colors group">
                   <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-[#ccff00] transition-colors">Atendidos</div>
                   <div className="text-4xl font-black tracking-tight">{summary.attended}</div>
@@ -183,7 +199,7 @@ export default function Home() {
             </AnimatedWrapper>
 
             <AnimatedWrapper delay={0.8}>
-              <MetricsTable data={metrics} />
+              <MetricsTable data={metrics} showTestDrive={showTestDrive} />
             </AnimatedWrapper>
 
           </section>

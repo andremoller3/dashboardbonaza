@@ -60,7 +60,20 @@ export function Sidebar({ selected, onSelect, isOpen = false, onClose }: Sidebar
 
                     {/* Navigation */}
                     <nav className="flex-1 px-4 space-y-3">
-                        <div className="text-[#ccff00] text-xs font-mono font-black uppercase tracking-[0.2em] mb-6 text-center drop-shadow-[0_0_8px_rgba(204,255,0,0.6)] opacity-100">
+                        {/* Main Nav */}
+                        <div className="flex flex-col gap-2 mb-8">
+                            <a href="/" className="flex items-center gap-3 px-4 py-3 text-white/90 hover:bg-white/10 rounded-xl transition-all group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                                <span className="font-bold tracking-wide uppercase text-sm">Dashboard</span>
+                            </a>
+
+                            <a href="/chats" className="flex items-center gap-3 px-4 py-3 text-[#00a884] bg-[#00a884]/10 rounded-xl border border-[#00a884]/20 transition-all group">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                <span className="font-bold tracking-wide uppercase text-sm">Conversas</span>
+                            </a>
+                        </div>
+
+                        <div className="text-[#ccff00] text-xs font-mono font-black uppercase tracking-[0.2em] mb-4 text-center drop-shadow-[0_0_8px_rgba(204,255,0,0.6)] opacity-100">
                             SELECIONE O MODELO
                         </div>
 
