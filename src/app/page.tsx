@@ -177,9 +177,9 @@ export default function Home() {
                 </div>
 
                 {showTestDrive && (
-                  <div className="border border-white/5 p-6 bg-[#0a0a0a] rounded-3xl shadow-lg hover:border-[#a855f7]/40 transition-colors group">
-                    <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-purple-400 transition-colors">Test Drives</div>
-                    <div className="text-4xl font-black tracking-tight text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.5)]">{summary.testDrive}</div>
+                  <div className="border border-white/5 p-6 bg-[#0a0a0a] rounded-3xl shadow-lg hover:border-[#ccff00]/20 transition-colors group">
+                    <div className="text-muted-foreground text-xs uppercase tracking-[0.2em] font-bold mb-2 group-hover:text-[#ccff00] transition-colors">Test Drives</div>
+                    <div className="text-4xl font-black tracking-tight text-[#ccff00] drop-shadow-[0_0_10px_rgba(204,255,0,0.3)]">{summary.testDrive}</div>
                   </div>
                 )}
 
